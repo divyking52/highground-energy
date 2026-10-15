@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Highground Energy — Optimized Solar Power Plants, Turnkey EPC, PMC & Solar Kits</title>
+
+  <!-- Google Fonts matching Framer 1Solar Neo-Grotesque + Technical Mono aesthetic -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0B0F0E',
+            forest: '#111916',
+            cardDark: '#16201C',
+            alabaster: '#F6F5F0',
+            stoneCard: '#EBE9E1',
+            solarLime: '#D4FF33',
+            solarAmber: '#F59E0B',
+            mutedDark: '#8E9893',
+            mutedLight: '#5A625E'
+          },
+          fontFamily: {
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Inter"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          },
+          transitionTimingFunction: {
+            'framer': 'cubic-bezier(0.22, 1, 0.36, 1)',
+            'spring': 'cubic-bezier(0.16, 1, 0.3, 1)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       FRAMER TEMPLATE SIGNATURE MICRO-INTERACTIONS & HOVER ANIMATIONS
+       ========================================================================== */
+    :root {
+      --ease-framer: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    body {
+      background-color: #F6F5F0;
+      color: #0B0F0E;
+      overflow-x: clip;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 1. 3D Per-Character Staggered Nav Hover Roll */
+    .char-roll {
+      display: inline-flex;
+      overflow: hidden;
+      position: relative;
+      line-height: 1.25;
+      padding: 2px 0;
+      perspective: 600px;
+    }
+    .char-roll .char {
+      display: inline-block;
+      position: relative;
+      transition: transform 0.48s var(--ease-framer);
+      transition-delay: calc(var(--char-index) * 16ms);
+      will-change: transform;
+    }
+    .char-roll .char::after {
+      content: attr(data-char);
+      position: absolute;
+      left: 0;
+      top: 115%;
+      color: #D4FF33;
+      font-weight: 600;
+    }
+    .char-roll.dark-roll .char::after {
+      color: #0B0F0E;
+    }
+    .char-roll:hover .char {
+      transform: translateY(-115%);
+    }
+
+    /* 2. Dual-Arrow Diagonal Button Glide + Background Sweep */
+    .btn-framer {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      transition: transform 0.4s var(--ease-framer), box-shadow 0.4s var(--ease-framer), color 0.35s var(--ease-framer), border-color 0.35s var(--ease-framer);
+    }
+    .btn-framer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-color: var(--sweep-bg, #FFFFFF);
+      transform: translateY(102%);
+      transition: transform 0.45s var(--ease-framer);
+      z-index: -1;
+      border-radius: inherit;
+    }
+    .btn-framer:hover::before {
+      transform: translateY(0%);
+    }
+    .btn-framer:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px -10px rgba(11, 15, 14, 0.28);
+    }
+    .btn-framer .arrow-box {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.4s var(--ease-framer), color 0.4s var(--ease-framer), transform 0.4s var(--ease-framer);
+    }
+    .btn-framer .arrow-primary,
+    .btn-framer .arrow-secondary {
+      transition: transform 0.45s var(--ease-framer);
+      will-change: transform;
+    }
+    .btn-framer .arrow-secondary {
+      position: absolute;
+      transform: translate(-140%, 140%);
+    }
+    .btn-framer:hover .arrow-primary {
+      transform: translate(140%, -140%);
+    }
+    .btn-framer:hover .arrow-secondary {
+      transform: translate(0%, 0%);
+    }
+
+    /* 3. Hero Image Scale-In & Interactive Parallax */
+    .hero-visual-stage {
+      transform: scale(1.08);
+      transition: transform 1.7s var(--ease-framer);
+      will-change: transform;
+    }
+    .hero-card-loaded .hero-visual-stage {
+      transform: scale(1);
+    }
+
+    /* 4. Infinite Seamless Marquee Ticker */
+    @keyframes marqueeScroll {
+      0% { transform: translate3d(0%, 0, 0); }
+      100% { transform: translate3d(-50%, 0, 0); }
+    }
+    @keyframes marqueeReverse {
+      0% { transform: translate3d(-50%, 0, 0); }
+      100% { transform: translate3d(0%, 0, 0); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 32s linear infinite;
+    }
+    .marquee-track-reverse {
+      display: flex;
+      width: max-content;
+      animation: marqueeReverse 36s linear infinite;
+    }
+    .marquee-track:hover,
+    .marquee-track-reverse:hover {
+      animation-play-state: paused;
+    }
+
+    /* 5. Scroll Reveal Stagger Animation */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.85s var(--ease-framer), transform 0.85s var(--ease-framer);
+      will-change: opacity, transform;
+    }
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 6. Overlapping Agency / Crew Stack Pop Hover */
+    .avatar-pill {
+      transition: transform 0.45s var(--ease-spring), box-shadow 0.45s var(--ease-spring), border-color 0.35s ease;
+    }
+    .avatar-pill:hover {
+      transform: translateY(-10px) scale(1.12);
+      z-index: 40;
+      box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.45);
+    }
+    .avatar-pill .avatar-tooltip {
+      opacity: 0;
+      transform: translate(-50%, 8px) scale(0.92);
+      transition: all 0.32s var(--ease-spring);
+      pointer-events: none;
+    }
+    .avatar-pill:hover .avatar-tooltip {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
+
+    /* 7. Interactive Service Rows + Smooth Expand & Zoom */
+    .service-row {
+      transition: background-color 0.45s var(--ease-framer), padding 0.45s var(--ease-framer), border-color 0.45s var(--ease-framer), box-shadow 0.45s var(--ease-framer);
+    }
+    .service-row:hover,
+    .service-row.active {
+      background-color: #FFFFFF;
+      box-shadow: 0 20px 45px -15px rgba(11, 15, 14, 0.08);
+    }
+    .service-row .service-title {
+      transition: transform 0.45s var(--ease-framer), color 0.35s var(--ease-framer);
+    }
+    .service-row:hover .service-title,
+    .service-row.active .service-title {
+      transform: translateX(12px);
+    }
+    .service-row .service-preview {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      transition: grid-template-rows 0.55s var(--ease-framer), opacity 0.45s var(--ease-framer), margin-top 0.45s var(--ease-framer);
+    }
+    .service-row:hover .service-preview,
+    .service-row.active .service-preview {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      margin-top: 1.75rem;
+    }
+    .media-zoom-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+    .media-zoom-el {
+      transition: transform 0.85s var(--ease-framer);
+      will-change: transform;
+    }
+    .group:hover .media-zoom-el,
+    .service-row:hover .media-zoom-el {
+      transform: scale(1.06);
+    }
+
+    /* 8. Floating Cursor Follow Preview Pill for Service Rows */
+    #serviceCursorBadge {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 60;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+      transition: opacity 0.25s ease, transform 0.25s var(--ease-spring);
+    }
+    #serviceCursorBadge.visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    /* 9. Spring-Physics FAQ Accordion */
+    .faq-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.48s var(--ease-framer);
+    }
+    .faq-item.open .faq-content {
+      grid-template-rows: 1fr;
+    }
+    .faq-icon {
+      transition: transform 0.45s var(--ease-framer), background-color 0.35s var(--ease-framer), color 0.35s var(--ease-framer);
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background-color: #D4FF33;
+      color: #0B0F0E;
+    }
+
+    /* 10. Pulsing Green Status Dot */
+    @keyframes pulseRing {
+      0% { transform: scale(0.85); opacity: 0.9; }
+      70% { transform: scale(2.35); opacity: 0; }
+      100% { transform: scale(2.35); opacity: 0; }
+    }
+    .pulse-dot::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background-color: #D4FF33;
+      animation: pulseRing 2s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    }
+
+    /* Subtle Sunbeam Shimmer Animation on Illustrated Solar Panels */
+    @keyframes solarGleam {
+      0%, 100% { opacity: 0.25; transform: translateX(-15%); }
+      50% { opacity: 0.65; transform: translateX(15%); }
+    }
+    .solar-gleam {
+      animation: solarGleam 7s ease-in-out infinite;
+    }
+
+    /* 11. Section Stack Parallax (sticky cards + depth) */
+    .section-stack {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .stack-section {
+      position: sticky;
+      top: 0;
+      z-index: var(--stack-z, 1);
+      width: 100%;
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+
+    /* Sections excluded from stack parallax (normal scroll, correct paint order) */
+    .stack-flow {
+      position: relative;
+      z-index: var(--stack-z, 1);
+      width: 100%;
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+
+    /* Tall sections: stick only after their own content has scrolled through */
+    .stack-section.is-tall {
+      top: calc(100vh - 100%);
+      top: calc(100dvh - 100%);
+    }
+
+    .stack-panel {
+      position: relative;
+      width: 100%;
+      min-height: min(100vh, 100dvh);
+      transform-origin: 50% 0%;
+      will-change: transform, filter;
+      backface-visibility: hidden;
+      box-shadow: 0 -1px 0 rgba(11, 15, 14, 0.04);
+    }
+
+    .stack-panel > .stack-shell {
+      width: 100%;
+      max-width: var(--stack-max, 1412px);
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .stack-panel--alabaster {
+      background-color: #F6F5F0;
+      color: #0B0F0E;
+    }
+
+    .stack-panel--obsidian {
+      background-color: #0B0F0E;
+      color: #FFFFFF;
+    }
+
+    .stack-panel--white {
+      background-color: #FFFFFF;
+      color: #0B0F0E;
+    }
+
+    /* Soft lift as the next section covers this one */
+    .stack-panel.is-receding {
+      border-radius: 0 0 28px 28px;
+    }
+
+    /* Footer sits above the stack so it cleans the exit */
+    .site-footer {
+      position: relative;
+      z-index: 40;
+      background-color: #F6F5F0;
+    }
+
+    /* Fixed UI above stack */
+    header {
+      z-index: 50;
+    }
+    #serviceCursorBadge {
+      z-index: 60;
+    }
+
+    /* Disable sticky stack on mobile + when user prefers reduced motion */
+    @media (max-width: 1023px), (prefers-reduced-motion: reduce) {
+      .stack-section,
+      .stack-section.is-tall {
+        position: relative;
+        top: auto;
+      }
+      .stack-panel {
+        transform: none !important;
+        filter: none !important;
+        border-radius: 0 !important;
+        min-height: 0;
+        will-change: auto;
+      }
+      .stack-panel.is-receding {
+        border-radius: 0;
+      }
+    }
+
+    /* On very short viewports, avoid forced min-height clipping */
+    @media (max-height: 560px) {
+      .stack-panel {
+        min-height: 0;
+      }
+    }
+
+  </style>
+</head>
+
+<body class="selection:bg-solarLime selection:text-obsidian">
+
+  <!-- ==========================================================================
+       FLOATING CURSOR BADGE FOR INTERACTIVE SERVICE ROWS
+       ========================================================================== -->
+  <div id="serviceCursorBadge" class="hidden lg:flex items-center gap-2 bg-solarLime text-obsidian font-mono text-xs font-semibold px-3.5 py-1.5 rounded-full shadow-2xl border border-obsidian/20">
+    <span>Inspect HGe Scope</span>
+    <span>↗</span>
+  </div>
+
+  <!-- ==========================================================================
+       HIGHGROUND ENERGY EXCLUSIVE ASSET ENGINE (ZERO FRAMER TEMPLATE IMAGES)
+       ========================================================================== -->
+  <script>
+    /**
+     * Images sourced from https://www.highgroundenergy.com/ (Wix static CDN).
+     * No Framer template images. No SVG artwork placeholders for media slots.
+     */
+    const HGE_ASSETS = {
+      logo: "https://static.wixstatic.com/media/468f04_ddd323402e5a41919d7e603ba727cad7~mv2.png",
+      hero: "https://static.wixstatic.com/media/468f04_8226d4a6872144e1a8fa238a4a4332a6~mv2.jpg",
+      staffCheckingPanels: "https://static.wixstatic.com/media/11062b_96df313a08ec41a7a1e0e30ba6c79316~mv2.jpg",
+      solarTechnician: "https://static.wixstatic.com/media/11062b_43adda7641ce4c06a0f8143ba494acf5~mv2.jpg",
+      solarKitsIM: "https://static.wixstatic.com/media/468f04_94518d8475ef4c22ab42ed2284060bc6~mv2.jpg",
+      aboutBg: "https://static.wixstatic.com/media/a9aecfcd0c474899a57da07176a929c4.jpg",
+      project1: "https://static.wixstatic.com/media/468f04_fe40875473ef498a9af4d087504c5681~mv2_d_4032_3024_s_4_2.jpg",
+      project2: "https://static.wixstatic.com/media/468f04_abb0d2b1a0bf4ee6a4e8ef97292ae62c~mv2_d_4032_3024_s_4_2.jpg",
+      project3: "https://static.wixstatic.com/media/468f04_5d43804aa0174610a1ae5ca972507d7f~mv2.jpg",
+      hybrid: "https://static.wixstatic.com/media/468f04_a7bf0ae0d0254137acb2d2ba920106b8~mv2.jpg"
+    };
+  </script>
+
+  <!-- ==========================================================================
+       FLOATING GLASSMORPHIC NAVBAR (Framer 1Solar Layout + 3D Character Roll)
+       ========================================================================== -->
+  <header class="fixed top-4 inset-x-0 z-50 px-3.5 md:px-7">
+    <nav class="max-w-[1420px] mx-auto bg-obsidian/90 backdrop-blur-xl border border-white/10 rounded-2xl px-4 sm:px-6 py-3.5 flex items-center justify-between shadow-2xl">
+      
+      <!-- Asset 1: Highground Energy Brand Logo (from highgroundenergy.com) -->
+      <a href="#home" class="flex items-center gap-3.5 group">
+        <div class="h-11 max-w-[200px] sm:max-w-[260px] flex items-center overflow-hidden relative bg-white rounded-xl px-2.5 py-1.5">
+          <img 
+            data-hge-slot="logo"
+            src="https://static.wixstatic.com/media/468f04_ddd323402e5a41919d7e603ba727cad7~mv2.png" 
+            alt="Highground Energy" 
+            class="h-7 sm:h-8 w-auto object-contain"
+          />
+        </div>
+      </a>
+
+      <!-- Center Navigation Links (3D Per-Character Staggered Roll) -->
+      <div class="hidden lg:flex items-center gap-7 text-sm text-white/85 font-medium">
+        <a href="#home" class="char-roll" data-roll="Home">Home</a>
+        <a href="#services" class="char-roll" data-roll="Services">Services</a>
+        <a href="#about" class="char-roll" data-roll="About">About</a>
+        <a href="#projects" class="char-roll" data-roll="Projects">Projects</a>
+        <a href="#clients" class="char-roll" data-roll="Clients">Clients</a>
+        <a href="#contact" class="char-roll" data-roll="Contact">Contact</a>
+      </div>
+
+      <!-- Right CTA + Mobile Menu Button -->
+      <div class="flex items-center gap-2.5">
+        <a href="#contact" style="--sweep-bg: #FFFFFF;" class="btn-framer bg-solarLime text-obsidian font-display font-semibold text-xs sm:text-sm pl-4 sm:pl-5 pr-2 py-2 rounded-xl flex items-center gap-2.5 shadow-md">
+          <span>Talk to our solar experts</span>
+          <span class="arrow-box w-7 h-7 rounded-lg bg-obsidian text-solarLime">
+            <svg class="arrow-primary w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+            </svg>
+            <svg class="arrow-secondary w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+            </svg>
+          </span>
+        </a>
+
+        <button id="mobileMenuBtn" onclick="toggleMobileNav()" class="lg:hidden w-10 h-10 rounded-xl bg-white/10 border border-white/15 text-white flex items-center justify-center" aria-label="Toggle Menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h16"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Dropdown Drawer -->
+    <div id="mobileNavDrawer" class="hidden lg:hidden max-w-[1420px] mx-auto mt-2 bg-obsidian/95 backdrop-blur-xl border border-white/15 rounded-2xl p-5 text-white shadow-2xl">
+      <div class="flex flex-col space-y-3 font-display text-base">
+        <a href="#home" onclick="toggleMobileNav()" class="py-2 border-b border-white/10 hover:text-solarLime">Home</a>
+        <a href="#services" onclick="toggleMobileNav()" class="py-2 border-b border-white/10 hover:text-solarLime">Services (EPC, PMC & Solar Kits)</a>
+        <a href="#about" onclick="toggleMobileNav()" class="py-2 border-b border-white/10 hover:text-solarLime">About Highground Energy</a>
+        <a href="#projects" onclick="toggleMobileNav()" class="py-2 border-b border-white/10 hover:text-solarLime">Project Snippets (50MW+)</a>
+        <a href="#clients" onclick="toggleMobileNav()" class="py-2 border-b border-white/10 hover:text-solarLime">Empaneled Agencies & Clients</a>
+        <a href="#contact" onclick="toggleMobileNav()" class="py-2 text-solarLime font-semibold">Contact — 011-43073201</a>
+      </div>
+    </div>
+  </header>
+
+    <!-- ==========================================================================
+       SECTION STACK PARALLAX ROOT
+       ========================================================================== -->
+  <main id="sectionStack" class="section-stack">
+
+<!-- ==========================================================================
+       HERO SECTION (Framer Rounded Showcase + Asset 2: "A staff checking solar panels")
+       ========================================================================== -->
+  <section id="home" class="stack-flow" style="--stack-z: 1;">
+    <div class="stack-panel stack-panel--alabaster pt-24 pb-6 px-3.5 md:px-7" style="--stack-max: 1468px;">
+      <div class="stack-shell">
+
+    <div id="heroCard" class="relative rounded-[28px] md:rounded-[38px] overflow-hidden bg-obsidian text-white min-h-[85vh] flex flex-col justify-between p-6 sm:p-10 md:p-14 lg:p-16 border border-white/10 shadow-2xl">
+      
+      <!-- Asset 2 Visual Stage: Live photo from highgroundenergy.com -->
+      <div id="heroParallaxStage" class="hero-visual-stage absolute inset-0 z-0 overflow-hidden">
+        <img 
+          data-hge-slot="hero"
+          src="https://static.wixstatic.com/media/468f04_8226d4a6872144e1a8fa238a4a4332a6~mv2.jpg" 
+          alt="Highground Energy solar power plant" 
+          class="w-full h-full object-cover object-center opacity-60 relative z-10"
+        />
+
+        <!-- Multi-stop dark gradient vignette for crisp typography legibility -->
+        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/65 to-obsidian/25 z-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-obsidian/90 via-obsidian/45 to-transparent z-20"></div>
+      </div>
+
+      <!-- Top Hero Bar: Location Status Pill + Value Chain Tags -->
+      <div class="relative z-30 flex flex-wrap items-center justify-between gap-4 pt-1">
+        <div class="inline-flex items-center gap-3 bg-obsidian/75 backdrop-blur-md border border-white/15 rounded-full px-4 py-2 shadow-lg">
+          <span class="relative w-2.5 h-2.5 rounded-full bg-solarLime pulse-dot"></span>
+          <span class="font-mono text-xs sm:text-sm tracking-wide text-white/95">
+            New Delhi, India · Established 2013
+          </span>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 font-mono text-xs text-white/90">
+          <span class="bg-obsidian/70 backdrop-blur-md border border-white/15 rounded-full px-3.5 py-1.5">
+            50MW+ Solar Experience
+          </span>
+          <span class="bg-solarLime/15 text-solarLime border border-solarLime/30 rounded-full px-3.5 py-1.5">
+            SECI · MNRE · BHEL · CEL · IOCL
+          </span>
+        </div>
+      </div>
+
+      <!-- Center & Bottom Hero Content -->
+      <div class="relative z-30 mt-16 md:mt-24">
+        <div class="max-w-4xl">
+          <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-solarLime mb-4">
+            <span>// COMPLETE PV VALUE CHAIN · TURNKEY EPC · PMC · SOLAR KITS</span>
+          </div>
+
+          <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-[70px] leading-[1.03] tracking-tight text-white">
+            Get the most optimized <br class="hidden sm:inline" />
+            <span class="text-solarLime">solar power plant</span> <br class="hidden sm:inline" />
+            designed for your needs.
+          </h1>
+
+          <p class="mt-6 text-base sm:text-lg md:text-xl text-white/85 max-w-2xl font-normal leading-relaxed">
+            Highground Energy collaborates with clients to solve today’s energy crisis and climate change—delivering reliable, robust, and cost-effective solar plants so clean power is available to all at a cost that pays for itself.
+          </p>
+
+          <!-- Dual Hero CTA Buttons with Diagonal Arrow Glide -->
+          <div class="mt-9 flex flex-wrap items-center gap-4">
+            <a href="#contact" style="--sweep-bg: #FFFFFF;" class="btn-framer bg-solarLime text-obsidian font-display font-bold text-base pl-6 pr-3 py-3.5 rounded-2xl flex items-center gap-4 shadow-xl">
+              <span>Talk to our solar experts</span>
+              <span class="arrow-box w-9 h-9 rounded-xl bg-obsidian text-solarLime">
+                <svg class="arrow-primary w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+                </svg>
+                <svg class="arrow-secondary w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+                </svg>
+              </span>
+            </a>
+
+            <a href="#services" style="--sweep-bg: #D4FF33;" class="btn-framer bg-white/10 hover:text-obsidian backdrop-blur-md border border-white/20 text-white font-display font-semibold text-base pl-6 pr-3 py-3.5 rounded-2xl flex items-center gap-4">
+              <span>Explore EPC, PMC & Kits</span>
+              <span class="arrow-box w-9 h-9 rounded-xl bg-white/15 text-white">
+                <svg class="arrow-primary w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+                </svg>
+                <svg class="arrow-secondary w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom 4-Metric Bar (Exact Highground Energy Project Snippets) -->
+        <div class="mt-14 pt-8 border-t border-white/15 grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div class="group cursor-default">
+            <div class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white flex items-baseline gap-1">
+              <span class="counter" data-target="2013">2013</span>
+            </div>
+            <p class="mt-1.5 font-mono text-xs sm:text-sm text-white/70 uppercase tracking-wider group-hover:text-solarLime transition-colors">
+              Established Leadership
+            </p>
+          </div>
+
+          <div class="group cursor-default">
+            <div class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white flex items-baseline">
+              <span class="counter" data-target="60">60</span><span class="text-solarLime">+</span>
+            </div>
+            <p class="mt-1.5 font-mono text-xs sm:text-sm text-white/70 uppercase tracking-wider group-hover:text-solarLime transition-colors">
+              Quality Check Points
+            </p>
+          </div>
+
+          <div class="group cursor-default">
+            <div class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white flex items-baseline">
+              <span class="counter" data-target="50">50</span><span>MW</span><span class="text-solarLime">+</span>
+            </div>
+            <p class="mt-1.5 font-mono text-xs sm:text-sm text-white/70 uppercase tracking-wider group-hover:text-solarLime transition-colors">
+              Combined Experience
+            </p>
+          </div>
+
+          <div class="group cursor-default">
+            <div class="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-white flex items-baseline">
+              <span class="counter" data-target="500">500</span><span class="text-solarLime">+</span>
+            </div>
+            <p class="mt-1.5 font-mono text-xs sm:text-sm text-white/70 uppercase tracking-wider group-hover:text-solarLime transition-colors">
+              Solar Kits Shipped
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Infinite Seamless Marquee Ticker Bar (Pauses on Hover) -->
+    <div class="mt-4 bg-obsidian text-white rounded-2xl py-4 overflow-hidden border border-obsidian/10 shadow-lg">
+      <div class="marquee-track flex items-center">
+        <!-- Set 1 -->
+        <div class="flex items-center gap-8 px-4 font-mono text-xs sm:text-sm tracking-wider uppercase text-white/90">
+          <span>Lumpsum Turnkey Solar EPC (25 MW+)</span>
+          <span class="text-solarLime">✦</span>
+          <span>Solar Project Management Consultancy (PMC)</span>
+          <span class="text-solarLime">✦</span>
+          <span>Customized BOM-BOQ Solar Kits (500+)</span>
+          <span class="text-solarLime">✦</span>
+          <span>Roof-Top Solar PV & Solar-Wind-DG Hybrid</span>
+          <span class="text-solarLime">✦</span>
+          <span>Empaneled: SECI · MNRE · BHEL · CEL · IOCL</span>
+          <span class="text-solarLime">✦</span>
+          <span>60+ Stringent Quality & Safety Checkpoints</span>
+          <span class="text-solarLime">✦</span>
+          <span>Solar-as-a-Service Model</span>
+          <span class="text-solarLime">✦</span>
+        </div>
+        <!-- Set 2 (Seamless Loop Duplicate) -->
+        <div class="flex items-center gap-8 px-4 font-mono text-xs sm:text-sm tracking-wider uppercase text-white/90" aria-hidden="true">
+          <span>Lumpsum Turnkey Solar EPC (25 MW+)</span>
+          <span class="text-solarLime">✦</span>
+          <span>Solar Project Management Consultancy (PMC)</span>
+          <span class="text-solarLime">✦</span>
+          <span>Customized BOM-BOQ Solar Kits (500+)</span>
+          <span class="text-solarLime">✦</span>
+          <span>Roof-Top Solar PV & Solar-Wind-DG Hybrid</span>
+          <span class="text-solarLime">✦</span>
+          <span>Empaneled: SECI · MNRE · BHEL · CEL · IOCL</span>
+          <span class="text-solarLime">✦</span>
+          <span>60+ Stringent Quality & Safety Checkpoints</span>
+          <span class="text-solarLime">✦</span>
+          <span>Solar-as-a-Service Model</span>
+          <span class="text-solarLime">✦</span>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROJECT SNIPPETS & BENTO PROGRESS CARDS (Framer "A decade of installs, measured")
+       ========================================================================== -->
+  <section class="stack-section" style="--stack-z: 2;">
+    <div class="stack-panel stack-panel--alabaster py-20 md:py-28 px-4 md:px-8" style="--stack-max: 1412px;">
+      <div class="stack-shell">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      
+      <!-- Left Narrative + Key Benchmarks -->
+      <div class="lg:col-span-5 reveal-up">
+        <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mutedLight mb-3">
+          <span class="w-2 h-2 rounded-full bg-obsidian"></span>
+          <span>Highground Project Snippets</span>
+        </div>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight leading-[1.08] text-obsidian">
+          Over a decade of solar engineering, <span class="italic font-normal text-mutedLight">measured.</span>
+        </h2>
+        <p class="mt-5 text-mutedLight text-base sm:text-lg leading-relaxed">
+          Since 2013, Team HGe and its valued partners have engineered, built, and maintained more than <strong class="text-obsidian">25 MW of Roof-Top Solar PV and Solar-Wind-DG hybrid systems</strong>, backed by 50MW+ combined team experience.
+        </p>
+
+        <div class="mt-8 space-y-2.5 border-t border-obsidian/10 pt-6">
+          <p class="font-mono text-xs uppercase tracking-widest text-mutedLight mb-3">Verified Execution Pillars</p>
+          <div class="flex items-center gap-3 bg-stoneCard hover:bg-obsidian hover:text-white transition-colors duration-300 px-4 py-3 rounded-xl text-sm font-medium cursor-default">
+            <span class="w-2 h-2 rounded-full bg-solarLime shrink-0"></span>
+            <span>Empaneled with SECI, MNRE, BHEL, CEL & IOCL</span>
+          </div>
+          <div class="flex items-center gap-3 bg-stoneCard hover:bg-obsidian hover:text-white transition-colors duration-300 px-4 py-3 rounded-xl text-sm font-medium cursor-default">
+            <span class="w-2 h-2 rounded-full bg-solarLime shrink-0"></span>
+            <span>60+ industry-defining quality & safety check points</span>
+          </div>
+          <div class="flex items-center gap-3 bg-stoneCard hover:bg-obsidian hover:text-white transition-colors duration-300 px-4 py-3 rounded-xl text-sm font-medium cursor-default">
+            <span class="w-2 h-2 rounded-full bg-solarLime shrink-0"></span>
+            <span>500+ customized BOM-BOQ Solar Kits shipped direct to site</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right 3 Interactive Bento Cards with 100% Fill Progress Bars on Hover -->
+      <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-5 reveal-up">
+        
+        <!-- Bento Stat 1 -->
+        <div class="group bg-stoneCard hover:bg-obsidian hover:text-white transition-all duration-500 ease-framer rounded-3xl p-7 flex flex-col justify-between min-h-[305px] border border-obsidian/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+          <div>
+            <div class="flex items-center justify-between">
+              <p class="font-mono text-xs uppercase tracking-wider text-mutedLight group-hover:text-white/60 transition-colors">
+                Combined Experience
+              </p>
+              <span class="font-mono text-xs text-obsidian group-hover:text-solarLime">01</span>
+            </div>
+            <h3 class="mt-5 font-display font-extrabold text-5xl lg:text-6xl tracking-tight group-hover:text-solarLime transition-colors">
+              50MW+
+            </h3>
+          </div>
+          <div>
+            <p class="text-xs sm:text-sm text-mutedLight group-hover:text-white/80 leading-relaxed mb-5 transition-colors">
+              25 MW+ direct Roof-Top Solar PV & Solar-Wind-DG hybrid execution with our valued partners.
+            </p>
+            <div class="w-full h-2 bg-obsidian/10 group-hover:bg-white/15 rounded-full overflow-hidden">
+              <div class="h-full w-[78%] bg-obsidian group-hover:bg-solarLime group-hover:w-full transition-all duration-700 ease-framer"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Stat 2 -->
+        <div class="group bg-stoneCard hover:bg-obsidian hover:text-white transition-all duration-500 ease-framer rounded-3xl p-7 flex flex-col justify-between min-h-[305px] border border-obsidian/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+          <div>
+            <div class="flex items-center justify-between">
+              <p class="font-mono text-xs uppercase tracking-wider text-mutedLight group-hover:text-white/60 transition-colors">
+                Customized Kits
+              </p>
+              <span class="font-mono text-xs text-obsidian group-hover:text-solarLime">02</span>
+            </div>
+            <h3 class="mt-5 font-display font-extrabold text-5xl lg:text-6xl tracking-tight group-hover:text-solarLime transition-colors">
+              500+
+            </h3>
+          </div>
+          <div>
+            <p class="text-xs sm:text-sm text-mutedLight group-hover:text-white/80 leading-relaxed mb-5 transition-colors">
+              Complete BOM-BOQ Solar Kits customized with Tier-1 components and dispatched directly to site.
+            </p>
+            <div class="w-full h-2 bg-obsidian/10 group-hover:bg-white/15 rounded-full overflow-hidden">
+              <div class="h-full w-[84%] bg-obsidian group-hover:bg-solarLime group-hover:w-full transition-all duration-700 ease-framer"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bento Stat 3 -->
+        <div class="group bg-stoneCard hover:bg-obsidian hover:text-white transition-all duration-500 ease-framer rounded-3xl p-7 flex flex-col justify-between min-h-[305px] border border-obsidian/5 shadow-sm hover:shadow-2xl hover:-translate-y-2 cursor-pointer">
+          <div>
+            <div class="flex items-center justify-between">
+              <p class="font-mono text-xs uppercase tracking-wider text-mutedLight group-hover:text-white/60 transition-colors">
+                Quality Protocol
+              </p>
+              <span class="font-mono text-xs text-obsidian group-hover:text-solarLime">03</span>
+            </div>
+            <h3 class="mt-5 font-display font-extrabold text-5xl lg:text-6xl tracking-tight group-hover:text-solarLime transition-colors">
+              60+
+            </h3>
+          </div>
+          <div>
+            <p class="text-xs sm:text-sm text-mutedLight group-hover:text-white/80 leading-relaxed mb-5 transition-colors">
+              Stringent engineering, safety, and telemetry check points audited on every Highground plant.
+            </p>
+            <div class="w-full h-2 bg-obsidian/10 group-hover:bg-white/15 rounded-full overflow-hidden">
+              <div class="h-full w-[90%] bg-obsidian group-hover:bg-solarLime group-hover:w-full transition-all duration-700 ease-framer"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ABOUT HIGHGROUND ENERGY + OVERLAPPING AGENCY STACK POP HOVER
+       ========================================================================== -->
+  <section id="about" class="stack-section" style="--stack-z: 3;">
+    <div class="stack-panel stack-panel--obsidian py-20 md:py-28 px-4 md:px-8 text-white" style="--stack-max: 1412px;">
+      <div class="stack-shell">
+
+    <div class="max-w-[1360px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Left Column Narrative -->
+      <div class="lg:col-span-6 reveal-up">
+        <div class="inline-flex items-center gap-2.5 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-6">
+          <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+          <span class="font-mono text-xs uppercase tracking-widest text-solarLime">About Highground Energy · Since 2013</span>
+        </div>
+
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl leading-[1.08] tracking-tight">
+          Adopting a leadership role in solving today’s energy crisis and climate change.
+        </h2>
+
+        <p class="mt-6 text-white/80 text-base sm:text-lg leading-relaxed">
+          Founded in 2013, <strong class="text-white font-semibold">Highground Energy Pvt. Ltd.</strong> collaborates with clients to find contemporary solutions to their energy-related challenges. Our strength lies in leveraging strong technical expertise in the <span class="text-solarLime">complete PV value chain</span> to deliver reliable, robust, and cost-effective solar plants.
+        </p>
+
+        <div class="mt-8 grid grid-cols-2 gap-4 pt-6 border-t border-white/10 font-mono text-xs text-white/75">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+            <span>Lumpsum Turnkey EPC</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+            <span>Detailed Engineering</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+            <span>System Integration & Training</span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+            <span>Solar-as-a-Service Model</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column Card + Overlapping Agency Stack Pop Hover -->
+      <div class="lg:col-span-6 bg-forest border border-white/10 rounded-3xl overflow-hidden reveal-up">
+        <div class="media-zoom-wrap h-48 sm:h-56">
+          <img
+            data-hge-slot="aboutBg"
+            src="https://static.wixstatic.com/media/a9aecfcd0c474899a57da07176a929c4.jpg"
+            alt="Highground Energy solar installation"
+            class="media-zoom-el w-full h-full object-cover"
+          />
+        </div>
+        <div class="p-8 sm:p-10">
+        <div class="flex items-center justify-between mb-6">
+          <span class="font-mono text-xs uppercase tracking-widest text-solarLime">// OUR MISSION & EMPANELMENT</span>
+          <span class="font-mono text-xs text-white/60">25 MW+ Rooftop & Hybrid</span>
+        </div>
+
+        <p class="text-white/90 text-base sm:text-lg leading-relaxed">
+          “Our aim is to make power available to all at a cost that <strong class="text-solarLime">pays for itself</strong>. We provide a complete range of services including lumpsum turnkey EPC services for roof-top projects, consulting, detailed engineering, system integration, training, project advisory services and solar-as-a-service model to our valued partners.”
+        </p>
+
+        <!-- Overlapping Agency Badges (Framer Crew Avatar Pop Hover Effect) -->
+        <div class="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+          
+          <div class="flex items-center -space-x-3">
+            <!-- SECI -->
+            <div class="avatar-pill relative w-14 h-14 rounded-2xl bg-cardDark border-2 border-solarLime flex flex-col items-center justify-center font-mono font-bold text-xs text-solarLime cursor-pointer">
+              <span>SECI</span>
+              <span class="text-[8px] text-white/60">GOVT</span>
+              <span class="avatar-tooltip absolute -top-11 left-1/2 bg-solarLime text-obsidian font-mono text-[11px] font-bold px-3 py-1 rounded-lg whitespace-nowrap shadow-xl">
+                Solar Energy Corp. of India
+              </span>
+            </div>
+            <!-- MNRE -->
+            <div class="avatar-pill relative w-14 h-14 rounded-2xl bg-cardDark border-2 border-white/25 hover:border-solarLime flex flex-col items-center justify-center font-mono font-bold text-xs text-white cursor-pointer">
+              <span>MNRE</span>
+              <span class="text-[8px] text-white/60">INDIA</span>
+              <span class="avatar-tooltip absolute -top-11 left-1/2 bg-solarLime text-obsidian font-mono text-[11px] font-bold px-3 py-1 rounded-lg whitespace-nowrap shadow-xl">
+                Ministry of New & Renewable Energy
+              </span>
+            </div>
+            <!-- BHEL -->
+            <div class="avatar-pill relative w-14 h-14 rounded-2xl bg-cardDark border-2 border-white/25 hover:border-solarLime flex flex-col items-center justify-center font-mono font-bold text-xs text-white cursor-pointer">
+              <span>BHEL</span>
+              <span class="text-[8px] text-white/60">PSU</span>
+              <span class="avatar-tooltip absolute -top-11 left-1/2 bg-solarLime text-obsidian font-mono text-[11px] font-bold px-3 py-1 rounded-lg whitespace-nowrap shadow-xl">
+                Bharat Heavy Electricals Ltd.
+              </span>
+            </div>
+            <!-- CEL -->
+            <div class="avatar-pill relative w-14 h-14 rounded-2xl bg-cardDark border-2 border-white/25 hover:border-solarLime flex flex-col items-center justify-center font-mono font-bold text-xs text-white cursor-pointer">
+              <span>CEL</span>
+              <span class="text-[8px] text-white/60">PSU</span>
+              <span class="avatar-tooltip absolute -top-11 left-1/2 bg-solarLime text-obsidian font-mono text-[11px] font-bold px-3 py-1 rounded-lg whitespace-nowrap shadow-xl">
+                Central Electronics Limited
+              </span>
+            </div>
+            <!-- IOCL -->
+            <div class="avatar-pill relative w-14 h-14 rounded-2xl bg-cardDark border-2 border-white/25 hover:border-solarLime flex flex-col items-center justify-center font-mono font-bold text-xs text-white cursor-pointer">
+              <span>IOCL</span>
+              <span class="text-[8px] text-white/60">PSU</span>
+              <span class="avatar-tooltip absolute -top-11 left-1/2 bg-solarLime text-obsidian font-mono text-[11px] font-bold px-3 py-1 rounded-lg whitespace-nowrap shadow-xl">
+                Indian Oil Corporation Ltd.
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="font-display font-bold text-xl text-white">Empaneled Partner</h3>
+            <p class="text-sm text-white/65">Hover each badge — SECI, MNRE, BHEL, CEL & IOCL</p>
+          </div>
+
+        </div>
+        </div>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE SERVICES SECTION (Assets 2, 3, 4 + Cursor Follow + Smooth Expand)
+       ========================================================================== -->
+  <section id="services" class="stack-flow" style="--stack-z: 4;">
+    <div class="stack-panel stack-panel--alabaster py-24 md:py-32 px-4 md:px-8" style="--stack-max: 1412px;">
+      <div class="stack-shell">
+
+    
+    <!-- Section Heading -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6 reveal-up">
+      <div>
+        <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mutedLight mb-3">
+          <span class="w-2 h-2 rounded-full bg-obsidian"></span>
+          <span>Highground Energy Core Offerings</span>
+        </div>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight text-obsidian max-w-2xl leading-[1.08]">
+          Solar Projects, PMC, and Custom Kits—owned end-to-end.
+        </h2>
+      </div>
+      <p class="text-mutedLight max-w-md text-sm sm:text-base">
+        Hover or click any offering below to expand Highground Energy’s engineering scope and inspect the corresponding site visual.
+      </p>
+    </div>
+
+    <!-- Interactive Service Accordion Rows -->
+    <div id="serviceRowsContainer" class="divide-y divide-obsidian/15 border-y border-obsidian/15 reveal-up">
+
+      <!-- SERVICE 01: SOLAR PROJECTS (EPC) — Asset 2: `A staff checking solar panels` -->
+      <div class="service-row active group py-7 px-4 sm:px-8 rounded-2xl cursor-pointer" onclick="toggleServiceRow(this)">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-baseline gap-5 sm:gap-8">
+            <span class="font-mono text-sm sm:text-base font-semibold text-mutedLight group-hover:text-obsidian">01.</span>
+            <h3 class="service-title font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-obsidian">
+              Solar Projects — Lumpsum Turnkey EPC
+            </h3>
+          </div>
+          <div class="flex items-center justify-between md:justify-end gap-5">
+            <span class="font-mono text-xs uppercase tracking-wider bg-stoneCard px-3.5 py-1.5 rounded-full text-obsidian font-medium">
+              25 MW+ Execution Experience
+            </span>
+            <div class="w-11 h-11 rounded-xl bg-stoneCard group-hover:bg-solarLime text-obsidian flex items-center justify-center transition-all duration-300 shadow-sm">
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-preview">
+          <div class="overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pl-0 md:pl-14 pt-2">
+              <div class="lg:col-span-6 space-y-4">
+                <p class="text-mutedLight text-base sm:text-lg leading-relaxed">
+                  We design, build, and maintain Solar projects with industry-defining quality and safety standards. With <strong class="text-obsidian">25 MW+ Solar EPC execution experience</strong> across Roof-Top Solar PV and Solar-Wind-DG hybrid systems, join us in our growth journey!
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                  <span class="bg-obsidian text-solarLime px-3 py-1.5 rounded-lg">25 MW+ EPC Track Record</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">60+ Quality Check Points</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">Industry-Defining Safety</span>
+                </div>
+                <div class="pt-2">
+                  <a href="#contact" onclick="event.stopPropagation()" style="--sweep-bg: #D4FF33;" class="btn-framer inline-flex items-center gap-3 bg-obsidian text-white hover:text-obsidian font-display font-semibold text-sm px-5 py-2.5 rounded-xl">
+                    <span>Join us in our growth journey</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Visual Card: A staff checking solar panels -->
+              <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
+                <img 
+                  data-hge-slot="staffCheckingPanels"
+                  src="https://static.wixstatic.com/media/11062b_96df313a08ec41a7a1e0e30ba6c79316~mv2.jpg" 
+                  alt="A staff checking solar panels" 
+                  class="media-zoom-el w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE 02: SOLAR PMC — Asset 3: `Solar Panels Technician` -->
+      <div class="service-row group py-7 px-4 sm:px-8 rounded-2xl cursor-pointer" onclick="toggleServiceRow(this)">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-baseline gap-5 sm:gap-8">
+            <span class="font-mono text-sm sm:text-base font-semibold text-mutedLight group-hover:text-obsidian">02.</span>
+            <h3 class="service-title font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-obsidian">
+              Solar PMC (Project Management Consultancy)
+            </h3>
+          </div>
+          <div class="flex items-center justify-between md:justify-end gap-5">
+            <span class="font-mono text-xs uppercase tracking-wider bg-stoneCard px-3.5 py-1.5 rounded-full text-obsidian font-medium">
+              Pre-Feasibility to O&M
+            </span>
+            <div class="w-11 h-11 rounded-xl bg-stoneCard group-hover:bg-solarLime text-obsidian flex items-center justify-center transition-all duration-300 shadow-sm">
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-preview">
+          <div class="overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pl-0 md:pl-14 pt-2">
+              <div class="lg:col-span-6 space-y-4">
+                <p class="text-mutedLight text-base sm:text-lg leading-relaxed">
+                  We help end users, developers, and investors maximize their return on investment in solar by assisting our clients at every stage of the project—from <strong class="text-obsidian">pre-feasibility, site-selection, and construction to operation and maintenance</strong>.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                  <span class="bg-obsidian text-solarLime px-3 py-1.5 rounded-lg">Pre-Feasibility & Site Selection</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">Construction Supervision</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">Operation & Maintenance (O&M)</span>
+                </div>
+                <div class="pt-2">
+                  <a href="#contact" onclick="event.stopPropagation()" style="--sweep-bg: #D4FF33;" class="btn-framer inline-flex items-center gap-3 bg-obsidian text-white hover:text-obsidian font-display font-semibold text-sm px-5 py-2.5 rounded-xl">
+                    <span>Maximize your Solar ROI</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Visual Card: Solar Panels Technician -->
+              <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
+                <img 
+                  data-hge-slot="solarTechnician"
+                  src="https://static.wixstatic.com/media/11062b_43adda7641ce4c06a0f8143ba494acf5~mv2.jpg" 
+                  alt="Solar Panels Technician" 
+                  class="media-zoom-el w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE 03: SOLAR KITS (BOM-BOQ) — Asset 4: `IM_edited.jpg` -->
+      <div class="service-row group py-7 px-4 sm:px-8 rounded-2xl cursor-pointer" onclick="toggleServiceRow(this)">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-baseline gap-5 sm:gap-8">
+            <span class="font-mono text-sm sm:text-base font-semibold text-mutedLight group-hover:text-obsidian">03.</span>
+            <h3 class="service-title font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-obsidian">
+              Solar Kits — Customized BOM-BOQ Dispatch
+            </h3>
+          </div>
+          <div class="flex items-center justify-between md:justify-end gap-5">
+            <span class="font-mono text-xs uppercase tracking-wider bg-stoneCard px-3.5 py-1.5 rounded-full text-obsidian font-medium">
+              500+ Kits Shipped Direct
+            </span>
+            <div class="w-11 h-11 rounded-xl bg-stoneCard group-hover:bg-solarLime text-obsidian flex items-center justify-center transition-all duration-300 shadow-sm">
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-preview">
+          <div class="overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pl-0 md:pl-14 pt-2">
+              <div class="lg:col-span-6 space-y-4">
+                <p class="text-mutedLight text-base sm:text-lg leading-relaxed">
+                  We customize the entire <strong class="text-obsidian">BOM-BOQ (Bill of Materials & Bill of Quantities)</strong> required in your Solar project and ship it directly to your site. Our kits are made using premium, high-quality products designed to perform reliably. Customize your own kit now!
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                  <span class="bg-obsidian text-solarLime px-3 py-1.5 rounded-lg">500+ Solar Kits Delivered</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">Complete BOM-BOQ Package</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">Direct-to-Site Shipping</span>
+                </div>
+                <div class="pt-2">
+                  <a href="#contact" onclick="event.stopPropagation()" style="--sweep-bg: #D4FF33;" class="btn-framer inline-flex items-center gap-3 bg-obsidian text-white hover:text-obsidian font-display font-semibold text-sm px-5 py-2.5 rounded-xl">
+                    <span>Customize your own kit now!</span>
+                    <span>→</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Visual Card: Customized Solar Kits BOM-BOQ -->
+              <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
+                <img 
+                  data-hge-slot="solarKitsIM"
+                  src="https://static.wixstatic.com/media/468f04_94518d8475ef4c22ab42ed2284060bc6~mv2.jpg" 
+                  alt="Customized Solar Kits BOM-BOQ" 
+                  class="media-zoom-el w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SERVICE 04: SOLAR-WIND-DG HYBRID & SOLAR-AS-A-SERVICE -->
+      <div class="service-row group py-7 px-4 sm:px-8 rounded-2xl cursor-pointer" onclick="toggleServiceRow(this)">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="flex items-baseline gap-5 sm:gap-8">
+            <span class="font-mono text-sm sm:text-base font-semibold text-mutedLight group-hover:text-obsidian">04.</span>
+            <h3 class="service-title font-display font-extrabold text-2xl sm:text-3xl md:text-4xl text-obsidian">
+              Solar-Wind-DG Hybrid & Solar-as-a-Service
+            </h3>
+          </div>
+          <div class="flex items-center justify-between md:justify-end gap-5">
+            <span class="font-mono text-xs uppercase tracking-wider bg-stoneCard px-3.5 py-1.5 rounded-full text-obsidian font-medium">
+              Complete PV Value Chain
+            </span>
+            <div class="w-11 h-11 rounded-xl bg-stoneCard group-hover:bg-solarLime text-obsidian flex items-center justify-center transition-all duration-300 shadow-sm">
+              <svg class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-preview">
+          <div class="overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pl-0 md:pl-14 pt-2">
+              <div class="lg:col-span-6 space-y-4">
+                <p class="text-mutedLight text-base sm:text-lg leading-relaxed">
+                  Beyond standard grid-tied rooftops, Team HGe specializes in complex <strong class="text-obsidian">Solar-Wind-DG hybrid system integration</strong>, detailed engineering, technical training, project advisory, and OPEX/RESCO <strong class="text-obsidian">Solar-as-a-Service</strong> models.
+                </p>
+                <div class="flex flex-wrap gap-2 pt-1 font-mono text-xs">
+                  <span class="bg-obsidian text-solarLime px-3 py-1.5 rounded-lg">Solar-Wind-DG Synchronization</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">Solar-as-a-Service</span>
+                  <span class="bg-stoneCard text-obsidian px-3 py-1.5 rounded-lg">Training & Advisory</span>
+                </div>
+              </div>
+
+              <!-- Hybrid PV-Wind-DG photo from highgroundenergy.com -->
+              <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
+                <img 
+                  data-hge-slot="hybrid"
+                  src="https://static.wixstatic.com/media/468f04_a7bf0ae0d0254137acb2d2ba920106b8~mv2.jpg" 
+                  alt="Highground Energy hybrid solar project" 
+                  class="media-zoom-el w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PROJECT SNIPPETS INTERACTIVE FILTER GALLERY (Asset 5: 25 MW+ Portfolio)
+       ========================================================================== -->
+  <section id="projects" class="stack-section" style="--stack-z: 5;">
+    <div class="stack-panel stack-panel--white py-20 md:py-28 px-4 md:px-8" style="--stack-max: 1412px;">
+      <div class="stack-shell">
+
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 reveal-up">
+      <div>
+        <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mutedLight mb-3">
+          <span class="w-2 h-2 rounded-full bg-obsidian"></span>
+          <span>Project Snippets · 25 MW+ Executed</span>
+        </div>
+        <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight text-obsidian leading-[1.08]">
+          Engineered across homes, institutions & heavy industries.
+        </h2>
+      </div>
+
+      <!-- Interactive Filter Tabs -->
+      <div class="flex flex-wrap gap-2" id="projectFilterTabs">
+        <button onclick="filterProjects('all', this)" class="proj-tab active-tab font-mono text-xs uppercase px-4 py-2.5 rounded-xl bg-obsidian text-solarLime font-semibold transition-all">
+          All (50MW+)
+        </button>
+        <button onclick="filterProjects('epc', this)" class="proj-tab font-mono text-xs uppercase px-4 py-2.5 rounded-xl bg-stoneCard text-obsidian hover:bg-obsidian/10 transition-all">
+          Rooftop EPC
+        </button>
+        <button onclick="filterProjects('pmc', this)" class="proj-tab font-mono text-xs uppercase px-4 py-2.5 rounded-xl bg-stoneCard text-obsidian hover:bg-obsidian/10 transition-all">
+          Solar PMC
+        </button>
+        <button onclick="filterProjects('kits', this)" class="proj-tab font-mono text-xs uppercase px-4 py-2.5 rounded-xl bg-stoneCard text-obsidian hover:bg-obsidian/10 transition-all">
+          Solar Kits (500+)
+        </button>
+        <button onclick="filterProjects('hybrid', this)" class="proj-tab font-mono text-xs uppercase px-4 py-2.5 rounded-xl bg-stoneCard text-obsidian hover:bg-obsidian/10 transition-all">
+          PV-Wind-DG Hybrid
+        </button>
+      </div>
+    </div>
+
+    <!-- Filterable Project Bento Grid -->
+    <div id="projectGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-up">
+
+      <!-- Project Card 1: Industrial Rooftop EPC (>100kW) -->
+      <article data-category="epc" class="project-card group rounded-3xl overflow-hidden bg-alabaster border border-obsidian/10 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+        <div class="media-zoom-wrap h-56 bg-obsidian relative overflow-hidden">
+          <img 
+            data-hge-slot="project1"
+            src="https://static.wixstatic.com/media/468f04_fe40875473ef498a9af4d087504c5681~mv2_d_4032_3024_s_4_2.jpg" 
+            alt="> 100kW INDUSTRIAL EPC" 
+            class="media-zoom-el w-full h-full object-cover"
+          />
+          <span class="absolute top-4 left-4 bg-obsidian/85 backdrop-blur-md text-solarLime font-mono text-[11px] px-3 py-1 rounded-full border border-solarLime/30">
+            > 100kW INDUSTRIAL EPC
+          </span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between font-mono text-xs text-mutedLight mb-2">
+            <span>Lumpsum Turnkey EPC</span>
+            <span>60+ Quality Checks</span>
+          </div>
+          <h3 class="font-display font-bold text-xl text-obsidian group-hover:text-forest">
+            Heavy Industrial Rooftop Solar PV Plant
+          </h3>
+          <p class="mt-2 text-sm text-mutedLight leading-relaxed">
+            High-yield metal-sheet & RCC rooftop solar installation engineered for maximum industrial tariff savings.
+          </p>
+        </div>
+      </article>
+
+      <!-- Project Card 2: PSU Empaneled Institutional Array -->
+      <article data-category="pmc" class="project-card group rounded-3xl overflow-hidden bg-alabaster border border-obsidian/10 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+        <div class="media-zoom-wrap h-56 bg-obsidian relative overflow-hidden">
+          <img 
+            data-hge-slot="project2"
+            src="https://static.wixstatic.com/media/468f04_abb0d2b1a0bf4ee6a4e8ef97292ae62c~mv2_d_4032_3024_s_4_2.jpg" 
+            alt="SECI / MNRE / PSU PMC" 
+            class="media-zoom-el w-full h-full object-cover"
+          />
+          <span class="absolute top-4 left-4 bg-obsidian/85 backdrop-blur-md text-solarLime font-mono text-[11px] px-3 py-1 rounded-full border border-solarLime/30">
+            SECI / MNRE / PSU PMC
+          </span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between font-mono text-xs text-mutedLight mb-2">
+            <span>Solar PMC & Advisory</span>
+            <span>20kW – 100kW</span>
+          </div>
+          <h3 class="font-display font-bold text-xl text-obsidian">
+            Institutional & Campus Solar Supervision
+          </h3>
+          <p class="mt-2 text-sm text-mutedLight leading-relaxed">
+            End-to-end owner's engineering, pre-feasibility, site selection, and O&M supervision for institutional campuses.
+          </p>
+        </div>
+      </article>
+
+      <!-- Project Card 3: Customized BOM-BOQ Solar Kits -->
+      <article data-category="kits" class="project-card group rounded-3xl overflow-hidden bg-alabaster border border-obsidian/10 flex flex-col justify-between transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+        <div class="media-zoom-wrap h-56 bg-obsidian relative overflow-hidden">
+          <img 
+            data-hge-slot="project3"
+            src="https://static.wixstatic.com/media/468f04_5d43804aa0174610a1ae5ca972507d7f~mv2.jpg" 
+            alt="500+ BOM-BOQ KITS" 
+            class="media-zoom-el w-full h-full object-cover"
+          />
+          <span class="absolute top-4 left-4 bg-obsidian/85 backdrop-blur-md text-solarLime font-mono text-[11px] px-3 py-1 rounded-full border border-solarLime/30">
+            500+ BOM-BOQ KITS
+          </span>
+        </div>
+        <div class="p-6">
+          <div class="flex items-center justify-between font-mono text-xs text-mutedLight mb-2">
+            <span>Direct-to-Site Dispatch</span>
+            <span>5kW – 100kW+</span>
+          </div>
+          <h3 class="font-display font-bold text-xl text-obsidian">
+            Pre-Engineered Custom Solar Kits
+          </h3>
+          <p class="mt-2 text-sm text-mutedLight leading-relaxed">
+            Complete customized Bill of Materials & Quantities shipped straight to project sites across India.
+          </p>
+        </div>
+      </article>
+
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ESTEEMED CUSTOMERS & EMPANELED AGENCIES SHOWCASE (#clients)
+       ========================================================================== -->
+  <section id="clients" class="stack-section" style="--stack-z: 6;">
+    <div class="stack-panel stack-panel--alabaster py-20 md:py-24 px-4 md:px-8" style="--stack-max: 1412px;">
+      <div class="stack-shell">
+
+    <div class="text-center max-w-3xl mx-auto mb-12 reveal-up">
+      <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mutedLight mb-3">
+        <span class="w-2 h-2 rounded-full bg-obsidian"></span>
+        <span>Empanelment & Esteemed Customers</span>
+      </div>
+      <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight text-obsidian">
+        Trusted by India’s premier renewable agencies & enterprises.
+      </h2>
+      <p class="mt-4 text-mutedLight text-base sm:text-lg">
+        Highground Energy is proudly empaneled with reputed national agencies and serves commercial, institutional, and industrial leaders across India.
+      </p>
+    </div>
+
+    <!-- 5 Primary Empaneled Agency Cards -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 reveal-up">
+      
+      <div class="group bg-white hover:bg-obsidian hover:text-white border border-obsidian/10 rounded-3xl p-6 flex flex-col justify-between min-h-[170px] transition-all duration-400 hover:-translate-y-1.5 hover:shadow-xl">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-xs text-mutedLight group-hover:text-solarLime">AGENCY 01</span>
+          <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+        </div>
+        <div>
+          <h3 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">SECI</h3>
+          <p class="text-xs text-mutedLight group-hover:text-white/70 mt-1">Solar Energy Corporation of India</p>
+        </div>
+      </div>
+
+      <div class="group bg-white hover:bg-obsidian hover:text-white border border-obsidian/10 rounded-3xl p-6 flex flex-col justify-between min-h-[170px] transition-all duration-400 hover:-translate-y-1.5 hover:shadow-xl">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-xs text-mutedLight group-hover:text-solarLime">AGENCY 02</span>
+          <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+        </div>
+        <div>
+          <h3 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">MNRE</h3>
+          <p class="text-xs text-mutedLight group-hover:text-white/70 mt-1">Ministry of New & Renewable Energy</p>
+        </div>
+      </div>
+
+      <div class="group bg-white hover:bg-obsidian hover:text-white border border-obsidian/10 rounded-3xl p-6 flex flex-col justify-between min-h-[170px] transition-all duration-400 hover:-translate-y-1.5 hover:shadow-xl">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-xs text-mutedLight group-hover:text-solarLime">AGENCY 03</span>
+          <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+        </div>
+        <div>
+          <h3 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">BHEL</h3>
+          <p class="text-xs text-mutedLight group-hover:text-white/70 mt-1">Bharat Heavy Electricals Limited</p>
+        </div>
+      </div>
+
+      <div class="group bg-white hover:bg-obsidian hover:text-white border border-obsidian/10 rounded-3xl p-6 flex flex-col justify-between min-h-[170px] transition-all duration-400 hover:-translate-y-1.5 hover:shadow-xl">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-xs text-mutedLight group-hover:text-solarLime">AGENCY 04</span>
+          <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+        </div>
+        <div>
+          <h3 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">CEL</h3>
+          <p class="text-xs text-mutedLight group-hover:text-white/70 mt-1">Central Electronics Limited</p>
+        </div>
+      </div>
+
+      <div class="group bg-white hover:bg-obsidian hover:text-white border border-obsidian/10 rounded-3xl p-6 flex flex-col justify-between min-h-[170px] transition-all duration-400 hover:-translate-y-1.5 hover:shadow-xl col-span-2 sm:col-span-1">
+        <div class="flex items-center justify-between">
+          <span class="font-mono text-xs text-mutedLight group-hover:text-solarLime">AGENCY 05</span>
+          <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+        </div>
+        <div>
+          <h3 class="font-display font-extrabold text-2xl sm:text-3xl tracking-tight">IOCL</h3>
+          <p class="text-xs text-mutedLight group-hover:text-white/70 mt-1">Indian Oil Corporation Limited</p>
+        </div>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PLANT SIZING TIERS & SPRING-PHYSICS FAQ ACCORDION
+       ========================================================================== -->
+  <section class="stack-section" style="--stack-z: 7;">
+    <div class="stack-panel stack-panel--alabaster py-16 md:py-24 px-4 md:px-8" style="--stack-max: 1412px;">
+      <div class="stack-shell">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      
+      <!-- Left: Highground Plant Capacity Selector Cards -->
+      <div class="lg:col-span-6 bg-obsidian text-white rounded-3xl p-8 sm:p-12 reveal-up shadow-xl">
+        <span class="font-mono text-xs uppercase tracking-widest text-solarLime">// PLANT SIZING MATRIX</span>
+        <h2 class="mt-3 font-display font-extrabold text-3xl sm:text-4xl tracking-tight leading-tight">
+          Select a solar plant capacity tailored to your load profile.
+        </h2>
+        <p class="mt-4 text-white/75 text-sm sm:text-base leading-relaxed">
+          Click any capacity tier below to pre-select it in our solar expert consultation form.
+        </p>
+
+        <div class="mt-8 space-y-3.5">
+          <button type="button" onclick="selectCapacityTier('5kW - 10kW (Suitable for Home)')" class="w-full text-left p-4 rounded-2xl bg-forest border border-white/10 hover:border-solarLime flex items-center justify-between group transition-all">
+            <div>
+              <span class="font-mono text-xs text-solarLime">CAPACITY OPTION 01</span>
+              <h4 class="font-display font-bold text-lg text-white group-hover:text-solarLime transition-colors">5kW - 10kW</h4>
+              <p class="text-xs text-white/65">Suitable for Home & Residential Rooftops</p>
+            </div>
+            <span class="font-mono text-xs bg-white/10 group-hover:bg-solarLime group-hover:text-obsidian px-3 py-1.5 rounded-lg transition-colors">Select →</span>
+          </button>
+
+          <button type="button" onclick="selectCapacityTier('10kW-20kW (Suitable for Home/Office/School/Institution)')" class="w-full text-left p-4 rounded-2xl bg-forest border border-white/10 hover:border-solarLime flex items-center justify-between group transition-all">
+            <div>
+              <span class="font-mono text-xs text-solarLime">CAPACITY OPTION 02</span>
+              <h4 class="font-display font-bold text-lg text-white group-hover:text-solarLime transition-colors">10kW - 20kW</h4>
+              <p class="text-xs text-white/65">Suitable for Home / Office / School / Institution</p>
+            </div>
+            <span class="font-mono text-xs bg-white/10 group-hover:bg-solarLime group-hover:text-obsidian px-3 py-1.5 rounded-lg transition-colors">Select →</span>
+          </button>
+
+          <button type="button" onclick="selectCapacityTier('20-100kW (Suitable for Office/Factory/Mall/Institution)')" class="w-full text-left p-4 rounded-2xl bg-forest border border-white/10 hover:border-solarLime flex items-center justify-between group transition-all">
+            <div>
+              <span class="font-mono text-xs text-solarLime">CAPACITY OPTION 03</span>
+              <h4 class="font-display font-bold text-lg text-white group-hover:text-solarLime transition-colors">20kW - 100kW</h4>
+              <p class="text-xs text-white/65">Suitable for Office / Factory / Mall / Institution</p>
+            </div>
+            <span class="font-mono text-xs bg-white/10 group-hover:bg-solarLime group-hover:text-obsidian px-3 py-1.5 rounded-lg transition-colors">Select →</span>
+          </button>
+
+          <button type="button" onclick="selectCapacityTier('More than 100kW (Suitable for Industries)')" class="w-full text-left p-4 rounded-2xl bg-forest border border-white/10 hover:border-solarLime flex items-center justify-between group transition-all">
+            <div>
+              <span class="font-mono text-xs text-solarLime">CAPACITY OPTION 04</span>
+              <h4 class="font-display font-bold text-lg text-white group-hover:text-solarLime transition-colors">More than 100kW</h4>
+              <p class="text-xs text-white/65">Suitable for Heavy Industries & Manufacturing</p>
+            </div>
+            <span class="font-mono text-xs bg-solarLime text-obsidian font-semibold px-3 py-1.5 rounded-lg">Select →</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Spring-Physics FAQ Accordion -->
+      <div class="lg:col-span-6 reveal-up">
+        <div class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-mutedLight mb-3">
+          <span class="w-2 h-2 rounded-full bg-obsidian"></span>
+          <span>Frequently Asked Questions</span>
+        </div>
+        <h3 class="font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-obsidian mb-8">
+          Everything you need to know about Highground Energy.
+        </h3>
+
+        <div class="space-y-4">
+          
+          <div class="faq-item open bg-white border border-obsidian/10 rounded-2xl p-6 cursor-pointer transition-shadow hover:shadow-md" onclick="toggleFaq(this)">
+            <div class="flex items-center justify-between gap-4">
+              <h4 class="font-display font-bold text-lg text-obsidian">
+                Which government and PSU agencies is Highground Energy empaneled with?
+              </h4>
+              <span class="faq-icon w-8 h-8 rounded-full bg-stoneCard flex items-center justify-center shrink-0 font-mono text-lg">+</span>
+            </div>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="pt-4 text-sm sm:text-base text-mutedLight leading-relaxed">
+                  Highground Energy is empaneled with reputed Indian agencies including <strong>SECI</strong>, <strong>MNRE</strong>, <strong>BHEL</strong>, <strong>CEL</strong>, and <strong>IOCL</strong>, backed by 50MW+ of combined team experience since 2013.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-white border border-obsidian/10 rounded-2xl p-6 cursor-pointer transition-shadow hover:shadow-md" onclick="toggleFaq(this)">
+            <div class="flex items-center justify-between gap-4">
+              <h4 class="font-display font-bold text-lg text-obsidian">
+                How do Highground Energy’s Customized Solar Kits work?
+              </h4>
+              <span class="faq-icon w-8 h-8 rounded-full bg-stoneCard flex items-center justify-center shrink-0 font-mono text-lg">+</span>
+            </div>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="pt-4 text-sm sm:text-base text-mutedLight leading-relaxed">
+                  We customize the entire <strong>BOM-BOQ (Bill of Materials & Bill of Quantities)</strong> required for your solar project using premium, high-quality products and ship the complete kit directly to your site. Over 500+ kits have been delivered.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-white border border-obsidian/10 rounded-2xl p-6 cursor-pointer transition-shadow hover:shadow-md" onclick="toggleFaq(this)">
+            <div class="flex items-center justify-between gap-4">
+              <h4 class="font-display font-bold text-lg text-obsidian">
+                What is covered under your 60+ Quality Check Points and Solar PMC?
+              </h4>
+              <span class="faq-icon w-8 h-8 rounded-full bg-stoneCard flex items-center justify-center shrink-0 font-mono text-lg">+</span>
+            </div>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="pt-4 text-sm sm:text-base text-mutedLight leading-relaxed">
+                  Our Solar Project Management Consultancy (PMC) assists end users, developers, and investors at every stage—from pre-feasibility, site selection, and construction audits across 60+ quality checkpoints to ongoing Operation & Maintenance (O&M).
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item bg-white border border-obsidian/10 rounded-2xl p-6 cursor-pointer transition-shadow hover:shadow-md" onclick="toggleFaq(this)">
+            <div class="flex items-center justify-between gap-4">
+              <h4 class="font-display font-bold text-lg text-obsidian">
+                Do you offer Solar-Wind-DG hybrid systems and Solar-as-a-Service?
+              </h4>
+              <span class="faq-icon w-8 h-8 rounded-full bg-stoneCard flex items-center justify-center shrink-0 font-mono text-lg">+</span>
+            </div>
+            <div class="faq-content">
+              <div class="overflow-hidden">
+                <p class="pt-4 text-sm sm:text-base text-mutedLight leading-relaxed">
+                  Yes. Team HGe and its valued partners have worked on more than 25 MW of Roof-Top Solar PV and Solar-Wind-DG hybrid systems, offering turnkey EPC, system integration, training, project advisory, and a Solar-as-a-Service model.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT & FULL HIGHGROUND ENERGY LEAD CAPTURE FORM
+       ========================================================================== -->
+  <section id="contact" class="stack-section" style="--stack-z: 8;">
+    <div class="stack-panel stack-panel--alabaster py-16 md:py-24 px-4 md:px-8" style="--stack-max: 1412px;">
+      <div class="stack-shell">
+
+    <div class="bg-obsidian text-white rounded-[32px] md:rounded-[44px] p-6 sm:p-12 lg:p-16 border border-white/10 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-12">
+      
+      <!-- Left Column: Head Office, Phone & Email from highgroundenergy.com -->
+      <div class="lg:col-span-5 flex flex-col justify-between reveal-up">
+        <div>
+          <div class="inline-flex items-center gap-2 bg-white/10 border border-white/15 rounded-full px-4 py-1.5 mb-6">
+            <span class="w-2 h-2 rounded-full bg-solarLime"></span>
+            <span class="font-mono text-xs uppercase tracking-widest text-solarLime">Contact Highground Energy</span>
+          </div>
+
+          <h2 class="font-display font-extrabold text-3xl sm:text-5xl tracking-tight leading-[1.08]">
+            Send us a message and we’ll get back to you shortly.
+          </h2>
+
+          <p class="mt-5 text-white/75 text-base leading-relaxed">
+            Whether you are looking to reduce your electricity bill, add a power backup option, lower your carbon footprint, supply solar products, or collaborate with Team Highground.
+          </p>
+        </div>
+
+        <div class="mt-10 space-y-6 pt-8 border-t border-white/15">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-solarLime">Direct Inquiries</p>
+            <p class="mt-2 text-2xl font-display font-bold">
+              <a href="tel:01143073201" class="hover:text-solarLime transition-colors">011-43073201</a>
+            </p>
+            <p class="mt-1 text-base text-white/85">
+              <a href="mailto:info@highgroundenergy.com" class="hover:text-solarLime transition-colors underline underline-offset-4">info@highgroundenergy.com</a>
+            </p>
+          </div>
+
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-solarLime">Head Office</p>
+            <p class="mt-2 text-white font-semibold text-lg">Highground Energy Pvt. Ltd.</p>
+            <p class="text-sm text-white/75 leading-relaxed">
+              349, 4-16, 100 Feet Rd, Ghitorni,<br />
+              Delhi 110030, India
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Exact Highground Energy Multi-Field Configurator Form -->
+      <div class="lg:col-span-7 bg-forest border border-white/10 rounded-3xl p-6 sm:p-10 reveal-up">
+        <form id="hgeLeadForm" onsubmit="submitHgeForm(event)" class="space-y-5">
+          
+          <!-- Name / Phone / Email -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">Name *</label>
+              <input type="text" required placeholder="Your Name" class="w-full bg-obsidian/90 border border-white/15 focus:border-solarLime rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors" />
+            </div>
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">Phone *</label>
+              <input type="tel" required placeholder="011 / +91 Mobile" class="w-full bg-obsidian/90 border border-white/15 focus:border-solarLime rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors" />
+            </div>
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">Email *</label>
+              <input type="email" required placeholder="you@domain.com" class="w-full bg-obsidian/90 border border-white/15 focus:border-solarLime rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors" />
+            </div>
+          </div>
+
+          <!-- Exact Field: "How can we help you?" -->
+          <div>
+            <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">How can we help you?</label>
+            <select class="w-full bg-obsidian/90 border border-white/15 focus:border-solarLime rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors">
+              <option value="I am a prospective customer">I am a prospective customer</option>
+              <option value="I am a vendor for solar products">I am a vendor for solar products</option>
+              <option value="I am looking to collaborate with Highground">I am looking to collaborate with Highground</option>
+              <option value="I want to be a part of team Highground">I want to be a part of team Highground</option>
+            </select>
+          </div>
+
+          <!-- Exact Fields: "My Energy Consumption is" & "I'm interested in Solar Power Plant of capacity" -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">My Energy Consumption is</label>
+              <input type="text" placeholder="Monthly kWh or Electricity Bill" class="w-full bg-obsidian/90 border border-white/15 focus:border-solarLime rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors" />
+            </div>
+
+            <div>
+              <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">I'm interested in Solar Power Plant of capacity</label>
+              <select id="capacitySelect" class="w-full bg-obsidian/90 border border-white/15 focus:border-solarLime rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors">
+                <option value="5kW - 10kW (Suitable for Home)">5kW - 10kW (Suitable for Home)</option>
+                <option value="10kW-20kW (Suitable for Home/Office/School/Institution)">10kW-20kW (Suitable for Home/Office/School/Institution)</option>
+                <option value="20-100kW (Suitable for Office/Factory/Mall/Institution)">20-100kW (Suitable for Office/Factory/Mall/Institution)</option>
+                <option value="More than 100kW (Suitable for Industries)">More than 100kW (Suitable for Industries)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Exact Field: "I'm interested in Solar because" -->
+          <div>
+            <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">I'm interested in Solar because</label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <label class="flex items-center gap-3 bg-obsidian/70 border border-white/10 hover:border-solarLime/50 rounded-xl px-4 py-2.5 cursor-pointer text-xs sm:text-sm">
+                <input type="radio" name="solarReason" value="Reduce my electricity bill" checked class="accent-solarLime" />
+                <span>Reduce my electricity bill</span>
+              </label>
+              <label class="flex items-center gap-3 bg-obsidian/70 border border-white/10 hover:border-solarLime/50 rounded-xl px-4 py-2.5 cursor-pointer text-xs sm:text-sm">
+                <input type="radio" name="solarReason" value="As a power backup option" class="accent-solarLime" />
+                <span>As a power backup option</span>
+              </label>
+              <label class="flex items-center gap-3 bg-obsidian/70 border border-white/10 hover:border-solarLime/50 rounded-xl px-4 py-2.5 cursor-pointer text-xs sm:text-sm">
+                <input type="radio" name="solarReason" value="Reduce my carbon footprint" class="accent-solarLime" />
+                <span>Reduce my carbon footprint</span>
+              </label>
+              <label class="flex items-center gap-3 bg-obsidian/70 border border-white/10 hover:border-solarLime/50 rounded-xl px-4 py-2.5 cursor-pointer text-xs sm:text-sm">
+                <input type="radio" name="solarReason" value="Others" class="accent-solarLime" />
+                <span>Others</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Exact Field: "Tell us more" -->
+          <div>
+            <label class="block font-mono text-xs uppercase tracking-wider text-white/75 mb-2">Tell us more</label>
+            <textarea rows="3" placeholder="Tell us about your rooftop, project timeline, or custom Solar Kit BOM-BOQ requirements..." class="w-full bg-obsidian/90 border border-white/15 focus:border-solarLime rounded-xl px-4 py-3 text-sm text-white outline-none transition-colors"></textarea>
+          </div>
+
+          <div class="pt-2 flex flex-wrap items-center justify-between gap-4">
+            <button type="submit" style="--sweep-bg: #FFFFFF;" class="btn-framer bg-solarLime text-obsidian font-display font-bold text-base pl-7 pr-3.5 py-3.5 rounded-2xl flex items-center gap-4 shadow-xl">
+              <span>Send</span>
+              <span class="arrow-box w-9 h-9 rounded-xl bg-obsidian text-solarLime">
+                <svg class="arrow-primary w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+                </svg>
+                <svg class="arrow-secondary w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7V16"/>
+                </svg>
+              </span>
+            </button>
+
+            <div id="hgeFormStatus" class="hidden font-mono text-xs text-solarLime bg-solarLime/10 border border-solarLime/30 px-4 py-2.5 rounded-xl">
+              ✓ Thanks for submitting! Highground Energy will contact you shortly.
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+      </div>
+    </div>
+  </section>
+
+    </main>
+
+<!-- ==========================================================================
+       FOOTER (Framer Minimalist Footer + Highground Energy Copyright & Socials)
+       ========================================================================== -->
+  <footer class="site-footer py-12 px-4 md:px-8 max-w-[1412px] mx-auto border-t border-obsidian/10">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3.5">
+        <div class="w-9 h-9 rounded-xl bg-obsidian text-solarLime flex items-center justify-center font-display font-extrabold text-xs">
+          HGe
+        </div>
+        <div>
+          <p class="text-sm font-medium text-obsidian">
+            © Highground Energy Pvt. Ltd.
+          </p>
+          <p class="text-xs text-mutedLight">
+            349, 4-16, 100 Feet Rd, Ghitorni, Delhi 110030 · 011-43073201 · info@highgroundenergy.com
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-6 text-sm font-semibold text-obsidian">
+        <a href="https://www.highgroundenergy.com/" target="_blank" rel="noopener" class="char-roll dark-roll" data-roll="LinkedIn">LinkedIn</a>
+        <a href="https://www.highgroundenergy.com/" target="_blank" rel="noopener" class="char-roll dark-roll" data-roll="Twitter">Twitter</a>
+        <a href="https://www.highgroundenergy.com/" target="_blank" rel="noopener" class="char-roll dark-roll" data-roll="Facebook">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       COMPLETE JAVASCRIPT INTERACTION & ANIMATION ENGINE
+       ========================================================================== -->
+  <script>
+    // 1. Initialize 3D Per-Character Staggered Hover Roll on all .char-roll elements
+    document.querySelectorAll('.char-roll').forEach(link => {
+      const text = link.getAttribute('data-roll') || link.textContent.trim();
+      link.innerHTML = '';
+      [...text].forEach((ch, idx) => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.style.setProperty('--char-index', idx);
+        span.setAttribute('data-char', ch === ' ' ? '\u00A0' : ch);
+        span.textContent = ch === ' ' ? '\u00A0' : ch;
+        link.appendChild(span);
+      });
+    });
+
+    // 2. Hero Scale-In Entrance + Mouse-Move Parallax Tilt
+    const heroCard = document.getElementById('heroCard');
+    const heroStage = document.getElementById('heroParallaxStage');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        heroCard?.classList.add('hero-card-loaded');
+      }, 90);
+    });
+
+    heroCard?.addEventListener('mousemove', (e) => {
+      const rect = heroCard.getBoundingClientRect();
+      const relX = (e.clientX - rect.left) / rect.width - 0.5;
+      const relY = (e.clientY - rect.top) / rect.height - 0.5;
+      if (heroStage) {
+        heroStage.style.transform = `scale(1.03) translate3d(${relX * -18}px, ${relY * -14}px, 0)`;
+      }
+    });
+
+    heroCard?.addEventListener('mouseleave', () => {
+      if (heroStage) {
+        heroStage.style.transform = 'scale(1) translate3d(0, 0, 0)';
+      }
+    });
+
+    // 3. Scroll Reveal Observer & Animated Number Counters
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
+
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-target'), 10);
+        const start = target > 1000 ? 1995 : 0;
+        const duration = 1500;
+        const startTime = performance.now();
+
+        function updateCounter(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          el.textContent = Math.floor(start + (target - start) * eased);
+          if (progress < 1) requestAnimationFrame(updateCounter);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(updateCounter);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+    // 4. Interactive Service Rows & Floating Cursor Badge
+    const serviceContainer = document.getElementById('serviceRowsContainer');
+    const cursorBadge = document.getElementById('serviceCursorBadge');
+
+    serviceContainer?.addEventListener('mouseenter', () => {
+      cursorBadge?.classList.add('visible');
+    });
+    serviceContainer?.addEventListener('mouseleave', () => {
+      cursorBadge?.classList.remove('visible');
+    });
+    serviceContainer?.addEventListener('mousemove', (e) => {
+      if (cursorBadge) {
+        cursorBadge.style.left = `${e.clientX + 18}px`;
+        cursorBadge.style.top = `${e.clientY - 18}px`;
+      }
+    });
+
+    function toggleServiceRow(row) {
+      document.querySelectorAll('.service-row').forEach(r => {
+        if (r !== row) r.classList.remove('active');
+      });
+      row.classList.toggle('active');
+    }
+
+    // 5. Interactive Project Snippets Filter Tabs
+    function filterProjects(category, btn) {
+      document.querySelectorAll('.proj-tab').forEach(t => {
+        t.classList.remove('bg-obsidian', 'text-solarLime', 'font-semibold');
+        t.classList.add('bg-stoneCard', 'text-obsidian');
+      });
+      btn.classList.remove('bg-stoneCard', 'text-obsidian');
+      btn.classList.add('bg-obsidian', 'text-solarLime', 'font-semibold');
+
+      document.querySelectorAll('.project-card').forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (category === 'all' || cardCat === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // 6. Capacity Matrix Quick-Selector
+    function selectCapacityTier(tierValue) {
+      const select = document.getElementById('capacitySelect');
+      if (select) {
+        select.value = tierValue;
+      }
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 7. Spring-Physics FAQ Accordion
+    function toggleFaq(item) {
+      item.classList.toggle('open');
+    }
+
+    // 8. Mobile Navigation Drawer Toggle
+    function toggleMobileNav() {
+      document.getElementById('mobileNavDrawer')?.classList.toggle('hidden');
+    }
+
+    // 9. Highground Lead Form Submission Handler
+    function submitHgeForm(e) {
+      e.preventDefault();
+      const status = document.getElementById('hgeFormStatus');
+      status?.classList.remove('hidden');
+      e.target.reset();
+      setTimeout(() => status?.classList.add('hidden'), 6500);
+    }
+
+    // 10. Live Slot Image Binder (assets preloaded from highgroundenergy.com Wix CDN)
+    function bindHgeSlot(slotName, url) {
+      document.querySelectorAll(`[data-hge-slot="${slotName}"]`).forEach(img => {
+        if (url && url.trim() !== '') {
+          img.src = url.trim();
+        }
+      });
+    }
+
+
+    // 11. Section Stack Parallax — sticky depth without layout thrash
+    (function initSectionStackParallax() {
+      const root = document.getElementById('sectionStack');
+      if (!root) return;
+
+      const sections = Array.from(root.querySelectorAll(':scope > .stack-section'));
+      if (!sections.length) return;
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const desktopStack = window.matchMedia('(min-width: 1024px)');
+      let ticking = false;
+      const lastProgress = new WeakMap();
+
+      function canStack() {
+        return desktopStack.matches && !reduceMotion.matches;
+      }
+
+      let enabled = canStack();
+
+      function measureTallSections() {
+        if (!enabled) {
+          sections.forEach((section) => section.classList.remove('is-tall'));
+          return;
+        }
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        sections.forEach((section) => {
+          // Include a small buffer so near-viewport sections don't trap scroll
+          const tall = section.offsetHeight > vh + 8;
+          section.classList.toggle('is-tall', tall);
+        });
+      }
+
+      function resetPanels() {
+        sections.forEach((section) => {
+          const panel = section.querySelector(':scope > .stack-panel');
+          if (!panel) return;
+          panel.style.transform = '';
+          panel.style.filter = '';
+          panel.classList.remove('is-receding');
+          lastProgress.delete(panel);
+        });
+      }
+
+      function updateStack() {
+        ticking = false;
+        if (!enabled) {
+          resetPanels();
+          return;
+        }
+
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+
+        for (let i = 0; i < sections.length; i++) {
+          const section = sections[i];
+          const panel = section.querySelector(':scope > .stack-panel');
+          if (!panel) continue;
+
+          const next = sections[i + 1];
+          let progress = 0;
+
+          if (next) {
+            const nextTop = next.getBoundingClientRect().top;
+            // 0 = next still below fold, 1 = next fully covering (top at/above 0)
+            progress = Math.min(1, Math.max(0, 1 - (nextTop / vh)));
+          }
+
+          const prev = lastProgress.get(panel);
+          if (prev !== undefined && Math.abs(prev - progress) < 0.001) continue;
+          lastProgress.set(panel, progress);
+
+          if (progress <= 0.001) {
+            panel.style.transform = 'translate3d(0,0,0) scale(1)';
+            panel.style.filter = 'brightness(1)';
+            panel.classList.remove('is-receding');
+            continue;
+          }
+
+          // Smoothstep ease for a cleaner stack feel
+          const eased = progress * progress * (3 - 2 * progress);
+          const scale = 1 - eased * 0.07;
+          const brightness = 1 - eased * 0.28;
+          const y = eased * -18;
+
+          panel.style.transform = `translate3d(0, ${y}px, 0) scale(${scale})`;
+          panel.style.filter = `brightness(${brightness})`;
+          panel.classList.add('is-receding');
+        }
+      }
+
+      function onScroll() {
+        if (!enabled) return;
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(updateStack);
+        }
+      }
+
+      function syncEnabled() {
+        const next = canStack();
+        if (next === enabled) {
+          if (enabled) {
+            measureTallSections();
+            onScroll();
+          }
+          return;
+        }
+        enabled = next;
+        if (!enabled) {
+          sections.forEach((s) => s.classList.remove('is-tall'));
+          resetPanels();
+        } else {
+          measureTallSections();
+          requestAnimationFrame(updateStack);
+        }
+      }
+
+      function onResize() {
+        syncEnabled();
+      }
+
+      function bindMedia(mq, handler) {
+        if (typeof mq.addEventListener === 'function') mq.addEventListener('change', handler);
+        else if (typeof mq.addListener === 'function') mq.addListener(handler);
+      }
+
+      bindMedia(reduceMotion, syncEnabled);
+      bindMedia(desktopStack, syncEnabled);
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onResize, { passive: true });
+
+      // Measure after fonts/images can affect height
+      syncEnabled();
+      window.addEventListener('load', onResize, { once: true });
+    })();
+
+    // Apply HGE_ASSETS to any slots that still need binding
+    if (typeof HGE_ASSETS !== 'undefined') {
+      Object.entries(HGE_ASSETS).forEach(([slot, url]) => bindHgeSlot(slot, url));
+    }
+  </script>
+</body>
+</html>

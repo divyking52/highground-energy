@@ -1,0 +1,4 @@
+﻿# Dependencies / archives
+*.zip
+.DS_Store
+Thumbs.db
