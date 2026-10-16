@@ -455,20 +455,20 @@
        ========================================================================== -->
   <script>
     /**
-     * Images sourced from https://www.highgroundenergy.com/ (Wix static CDN).
-     * No Framer template images. No SVG artwork placeholders for media slots.
+     * Images served from Storebox CDN (website media library).
+     * Local /assets kept as fallback for any media not yet uploaded.
      */
     const HGE_ASSETS = {
-      logo: "https://static.wixstatic.com/media/468f04_ddd323402e5a41919d7e603ba727cad7~mv2.png",
-      hero: "https://static.wixstatic.com/media/468f04_8226d4a6872144e1a8fa238a4a4332a6~mv2.jpg",
-      staffCheckingPanels: "https://static.wixstatic.com/media/11062b_96df313a08ec41a7a1e0e30ba6c79316~mv2.jpg",
-      solarTechnician: "https://static.wixstatic.com/media/11062b_43adda7641ce4c06a0f8143ba494acf5~mv2.jpg",
-      solarKitsIM: "https://static.wixstatic.com/media/468f04_94518d8475ef4c22ab42ed2284060bc6~mv2.jpg",
-      aboutBg: "https://static.wixstatic.com/media/a9aecfcd0c474899a57da07176a929c4.jpg",
-      project1: "https://static.wixstatic.com/media/468f04_fe40875473ef498a9af4d087504c5681~mv2_d_4032_3024_s_4_2.jpg",
-      project2: "https://static.wixstatic.com/media/468f04_abb0d2b1a0bf4ee6a4e8ef97292ae62c~mv2_d_4032_3024_s_4_2.jpg",
-      project3: "https://static.wixstatic.com/media/468f04_5d43804aa0174610a1ae5ca972507d7f~mv2.jpg",
-      hybrid: "https://static.wixstatic.com/media/468f04_a7bf0ae0d0254137acb2d2ba920106b8~mv2.jpg"
+      logo: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/f00591da-368b-4078-9384-3f11a8c78d72/logo.png",
+      hero: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/2d72ef5b-8733-4f60-8553-101b631a0a62/hero.jpg",
+      staffCheckingPanels: "assets/staff-checking-panels.jpg",
+      solarTechnician: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/87ca9c80-d9c5-40f9-b9fd-0880444fb04d/solar-technician.jpg",
+      solarKitsIM: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/6af94522-abfe-4c3a-af4d-83438a098149/solar-kits-im.jpg",
+      aboutBg: "assets/about-bg.jpg",
+      project1: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/51f74633-2d46-47a7-a3bb-3710854f7e11/project-1.jpg",
+      project2: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/f6a54161-e39d-40c3-b239-9e4a3158dc4f/project-2.jpg",
+      project3: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/316489d2-5166-4adc-9501-9bb727676bf4/project-3.jpg",
+      hybrid: "https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/3ebc1525-ba14-45af-acc6-b1f4dc6884ef/hybrid.jpg"
     };
   </script>
 
@@ -483,7 +483,7 @@
         <div class="h-11 max-w-[200px] sm:max-w-[260px] flex items-center overflow-hidden relative bg-white rounded-xl px-2.5 py-1.5">
           <img 
             data-hge-slot="logo"
-            src="https://static.wixstatic.com/media/468f04_ddd323402e5a41919d7e603ba727cad7~mv2.png" 
+            src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/f00591da-368b-4078-9384-3f11a8c78d72/logo.png" 
             alt="Highground Energy" 
             class="h-7 sm:h-8 w-auto object-contain"
           />
@@ -553,7 +553,7 @@
       <div id="heroParallaxStage" class="hero-visual-stage absolute inset-0 z-0 overflow-hidden">
         <img 
           data-hge-slot="hero"
-          src="https://static.wixstatic.com/media/468f04_8226d4a6872144e1a8fa238a4a4332a6~mv2.jpg" 
+          src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/2d72ef5b-8733-4f60-8553-101b631a0a62/hero.jpg" 
           alt="Highground Energy solar power plant" 
           class="w-full h-full object-cover object-center opacity-60 relative z-10"
         />
@@ -878,7 +878,7 @@
         <div class="media-zoom-wrap h-48 sm:h-56">
           <img
             data-hge-slot="aboutBg"
-            src="https://static.wixstatic.com/media/a9aecfcd0c474899a57da07176a929c4.jpg"
+            src="assets/about-bg.jpg"
             alt="Highground Energy solar installation"
             class="media-zoom-el w-full h-full object-cover"
           />
@@ -1025,7 +1025,7 @@
               <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
                 <img 
                   data-hge-slot="staffCheckingPanels"
-                  src="https://static.wixstatic.com/media/11062b_96df313a08ec41a7a1e0e30ba6c79316~mv2.jpg" 
+                  src="assets/staff-checking-panels.jpg" 
                   alt="A staff checking solar panels" 
                   class="media-zoom-el w-full h-full object-cover"
                 />
@@ -1080,7 +1080,7 @@
               <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
                 <img 
                   data-hge-slot="solarTechnician"
-                  src="https://static.wixstatic.com/media/11062b_43adda7641ce4c06a0f8143ba494acf5~mv2.jpg" 
+                  src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/87ca9c80-d9c5-40f9-b9fd-0880444fb04d/solar-technician.jpg" 
                   alt="Solar Panels Technician" 
                   class="media-zoom-el w-full h-full object-cover"
                 />
@@ -1135,7 +1135,7 @@
               <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
                 <img 
                   data-hge-slot="solarKitsIM"
-                  src="https://static.wixstatic.com/media/468f04_94518d8475ef4c22ab42ed2284060bc6~mv2.jpg" 
+                  src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/6af94522-abfe-4c3a-af4d-83438a098149/solar-kits-im.jpg" 
                   alt="Customized Solar Kits BOM-BOQ" 
                   class="media-zoom-el w-full h-full object-cover"
                 />
@@ -1184,7 +1184,7 @@
               <div class="lg:col-span-6 media-zoom-wrap rounded-2xl bg-obsidian h-60 sm:h-72 border border-obsidian/15 relative shadow-xl overflow-hidden">
                 <img 
                   data-hge-slot="hybrid"
-                  src="https://static.wixstatic.com/media/468f04_a7bf0ae0d0254137acb2d2ba920106b8~mv2.jpg" 
+                  src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/3ebc1525-ba14-45af-acc6-b1f4dc6884ef/hybrid.jpg" 
                   alt="Highground Energy hybrid solar project" 
                   class="media-zoom-el w-full h-full object-cover"
                 />
@@ -1245,7 +1245,7 @@
         <div class="media-zoom-wrap h-56 bg-obsidian relative overflow-hidden">
           <img 
             data-hge-slot="project1"
-            src="https://static.wixstatic.com/media/468f04_fe40875473ef498a9af4d087504c5681~mv2_d_4032_3024_s_4_2.jpg" 
+            src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/51f74633-2d46-47a7-a3bb-3710854f7e11/project-1.jpg" 
             alt="> 100kW INDUSTRIAL EPC" 
             class="media-zoom-el w-full h-full object-cover"
           />
@@ -1272,7 +1272,7 @@
         <div class="media-zoom-wrap h-56 bg-obsidian relative overflow-hidden">
           <img 
             data-hge-slot="project2"
-            src="https://static.wixstatic.com/media/468f04_abb0d2b1a0bf4ee6a4e8ef97292ae62c~mv2_d_4032_3024_s_4_2.jpg" 
+            src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/f6a54161-e39d-40c3-b239-9e4a3158dc4f/project-2.jpg" 
             alt="SECI / MNRE / PSU PMC" 
             class="media-zoom-el w-full h-full object-cover"
           />
@@ -1299,7 +1299,7 @@
         <div class="media-zoom-wrap h-56 bg-obsidian relative overflow-hidden">
           <img 
             data-hge-slot="project3"
-            src="https://static.wixstatic.com/media/468f04_5d43804aa0174610a1ae5ca972507d7f~mv2.jpg" 
+            src="https://cdn.storebox.ai/media/1dea7b06-074c-429d-ae74-5ffa9e407c26/316489d2-5166-4adc-9501-9bb727676bf4/project-3.jpg" 
             alt="500+ BOM-BOQ KITS" 
             class="media-zoom-el w-full h-full object-cover"
           />

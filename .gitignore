@@ -3,3 +3,13 @@
 .DS_Store
 Thumbs.db
 .vercel
+
+# CDN-hosted duplicates (kept locally for offline use only)
+assets/logo.png
+assets/hero.jpg
+assets/solar-technician.jpg
+assets/solar-kits-im.jpg
+assets/project-1.jpg
+assets/project-2.jpg
+assets/project-3.jpg
+assets/hybrid.jpg
